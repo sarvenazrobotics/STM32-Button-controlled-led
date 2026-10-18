@@ -281,7 +281,7 @@ All constants are hard-coded in `main.c`. Convert them to `#define`s if you plan
 
 Unless otherwise stated, this project is derived from STMicroelectronics HAL code, which is licensed under the **BSD-3-Clause** license as distributed in `Drivers/CMSIS/LICENSE.txt` and `Drivers/STM32*_HAL_Driver/LICENSE.txt`.
 
-The application logic in `Core/Src/main.c` (inside the `USER CODE BEGIN` / `USER CODE END` markers) is provided under the **MIT License** — use it freely, modify it, and redistribute it.
+
 
 ---
 
