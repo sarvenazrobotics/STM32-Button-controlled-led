@@ -112,6 +112,32 @@ int main(void)
         {
             uint32_t start_time = HAL_GetTick();
             uint8_t is_long_press = 0;
+					
+					 // 2. Wait while the button is held down
+            while (KEY1 == GPIO_PIN_RESET)
+            {
+                // Check if 3 seconds (3000 ms) have passed
+                if (HAL_GetTick() - start_time >= 3000)
+                {
+                    LED1(1); // Turn LED ON (Long press action)
+                    is_long_press = 1;
+                    break; // Stop waiting, we handled the long press
+                }
+            
+					}
+						   // 3. Handle Short Press
+            // If the button was released BEFORE 3 seconds passed
+            if (is_long_press == 0)
+            {
+                LED1(1);       // Turn LED ON
+                HAL_Delay(1000); // Wait 1 second
+                LED1(0);       // Turn LED OFF
+            }
+        }
+    }
+		
+		        HAL_Delay(10); // Small delay to save CPU when button is not pressed
+						
   }
   /* USER CODE END 3 */
 }
