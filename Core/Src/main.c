@@ -90,6 +90,7 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   /* USER CODE BEGIN 2 */
+	LED1(0);
 	
   /* USER CODE END 2 */
 
@@ -101,6 +102,7 @@ int main(void)
 		/* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
+		static uint8_t led_state = 0;
 		
 		// 1. Check if Button is pressed (KEY1 returns 0/GPIO_PIN_RESET when pressed)
     if (KEY1 == GPIO_PIN_RESET)
@@ -111,27 +113,39 @@ int main(void)
         if (KEY1 == GPIO_PIN_RESET)
         {
             uint32_t start_time = HAL_GetTick();
-            uint8_t is_long_press = 0;
+					  uint8_t  long_press = 0;
+            
 					
 					 // 2. Wait while the button is held down
             while (KEY1 == GPIO_PIN_RESET)
             {
-                // Check if 3 seconds (3000 ms) have passed
-                if (HAL_GetTick() - start_time >= 3000)
-                {
-                    LED1(1); // Turn LED ON (Long press action)
-                    is_long_press = 1;
-                    break; // Stop waiting, we handled the long press
-                }
+							
+							if (!long_press && (HAL_GetTick() - start_time >= 3000))
+            {
+                long_press = 1;
+                led_state  = 1;
+                LED1(led_state);         // Immediate feedback at 3 s
+            }
+                
             
 					}
 						   // 3. Handle Short Press
             // If the button was released BEFORE 3 seconds passed
-            if (is_long_press == 0)
+					
+					   // 4. Decide action based on duration
+					 // 3. Calculate how long the button was held
+             HAL_Delay(50);                   // Release debounce
+
+          if (long_press)
+            {
+                // Long Press: Turn LED ON and keep it ON
+                LED1(1); 
+            }
+            else
             {
                 LED1(1);       // Turn LED ON
                 HAL_Delay(1000); // Wait 1 second
-                LED1(0);       // Turn LED OFF
+                LED1(led_state ? 1 : 0);     // Restore previous state
             }
         }
     }
