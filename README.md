@@ -12,6 +12,7 @@ An STM32CubeMX-generated firmware demonstrating **short-press** and **long-press
 - [Overview](#overview)
 - [Features](#features)
 - [Behavior](#behavior)
+- [Proteus Simulation](#Proteus-Simulation)
 - [Hardware Requirements](#hardware-requirements)
 - [Software Requirements](#software-requirements)
 - [Project Structure](#project-structure)
