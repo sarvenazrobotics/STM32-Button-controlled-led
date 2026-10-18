@@ -61,6 +61,12 @@ The firmware is intentionally kept small and side-effect free beyond what is doc
 
 ---
 
+### Proteus Simulation
+
+https://github.com/user-attachments/assets/bfe00aa3-44a1-4c0a-866d-9a629275a66e
+
+
+
 ## Hardware Requirements
 
 - An STM32 development board supported by the current CubeMX project
