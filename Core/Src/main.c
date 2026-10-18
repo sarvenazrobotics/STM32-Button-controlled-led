@@ -90,26 +90,28 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   /* USER CODE BEGIN 2 */
-
+	
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
 		
-  { if(KEY1==0)
-		{ 
-		  LED1(1);
-			HAL_Delay(1000);
-		}
-		else
-		
-		LED1(0);
-		
-		
-    /* USER CODE END WHILE */
+  { 
+		/* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
+		
+		// 1. Check if Button is pressed (KEY1 returns 0/GPIO_PIN_RESET when pressed)
+    if (KEY1 == GPIO_PIN_RESET)
+    {
+        HAL_Delay(20); // Debounce: wait 20ms to ignore noise
+        
+        // Check again to confirm it's a real press
+        if (KEY1 == GPIO_PIN_RESET)
+        {
+            uint32_t start_time = HAL_GetTick();
+            uint8_t is_long_press = 0;
   }
   /* USER CODE END 3 */
 }
